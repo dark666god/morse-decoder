@@ -35,11 +35,46 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    ' '    :  ' ',
 };
 
 function decode(expr) {
-    // write your solution here
+    let left = [];
+    let output = '';
+    let fin = [];
+    let arr = []
+    arr = (expr.split(/(.{10})/).filter(O => O));
+      for(let k of arr){
+           left.push(k.split(/(.{2})/).filter(O => O));
+        }
+      for(let i = 0; i < left.length; i++){
+          for(let k of left[i]){
+             if( k === '10'){
+               fin[i] += ('.')
+             }else if( k === '11'){
+               fin[i] += ('-')
+             }else if( k === '**'){
+               fin[i] += (' ')
+               break;
+             }
+          }
+
+      }
+  //  return fin[0].substr(9);
+      for( let u = 0; u < fin.length; u++){
+           for(let key in MORSE_TABLE){
+                if(fin[u].substr(9) === key){
+                  output += MORSE_TABLE[key];
+                 }
+
+                }
+             }
+
+           return output;
+
+
 }
+
 
 module.exports = {
     decode
